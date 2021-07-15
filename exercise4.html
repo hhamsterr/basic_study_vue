@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input v-model="keyword" type="text">
+        <li v-for="(item,index) in changeitems" :key="index">
+            {{item.name}}--{{item.age}}--{{item.sex}}
+        </li>
+        {{keyword}}
+
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                keyword: '',
+                items1: [
+                    { id: 01, name: '周冬雨', age: 18, sex: '女' },
+                    { id: 02, name: '周杰伦', age: 19, sex: '男' },
+                    { id: 03, name: '王小伦', age: 20, sex: '女' },
+                    { id: 04, name: '陈小二', age: 17, sex: '男' },
+                ],
+            },
+            computed: {
+                changeitems() {
+                    value = this.keyword
+                    return this.items1.filter(item => item.name.indexOf(value) !== -1
+                    )
+                    // 不用箭头函数的写法
+                    // return this.items1.filter(function (item){ 
+                    //     item.name.indexOf(this.keyword) !== 1 
+                    // })
+                }
+            },
+            // watch:{
+            //     keyword(){
+            //         value=this.keyword
+            //         const array=this.items1.filter(function(item){
+            //             return item.name.indexOf(value)!==-1
+            //         })
+            //         console.log(array);
+            //     }
+            // },
+            methods: {
+                demo() {
+                    console.log(1);
+                }
+            },
+        })
+    </script>
+
+</body>
+
+</html>

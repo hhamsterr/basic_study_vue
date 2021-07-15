@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input v-model="keyword" type="text">
+        <button @click="sorttype=1">年龄升序</button>
+        <button @click="sorttype=2">年龄降序</button>
+        <button @click="sorttype=0">原序</button>
+        <button @click="changename()">改名字</button>
+        <li v-for="(item,index) in changeitems" :key="index">
+            {{item.name}}--{{item.age}}--{{item.sex}}
+        </li>
+    </div>
+    <script>    
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                keyword: '',
+                sorttype:0,
+                items1: [
+                    { id: 01, name: '周冬雨', age: 18, sex: '女' },
+                    { id: 02, name: '周杰伦', age: 19, sex: '男' },
+                    { id: 03, name: '王小伦', age: 20, sex: '女' },
+                    { id: 04, name: '陈小二', age: 17, sex: '男' },
+                ],
+            },
+            computed: {
+                changeitems() {
+                    value = this.keyword
+                    // console.log(this);指向vue
+                    value1=this.sorttype//不能直接把this.sorttype写在value1那里
+                    let arr= this.items1.filter(item => item.name.indexOf(value) !== -1)
+                    if(value1){
+                        arr.sort(function(a,b){
+                            // console.log(this);指向window
+                            if(value1===1) return a.age-b.age
+                            else return b.age-a.age
+                        })
+                    } 
+                    return arr
+                    
+                }
+            },
+            
+            methods: {
+             changename(){
+                this.items1[0].name='夏冬雨'
+                this.items1[0].age=80   
+                // this.items1[0]={name:'123',age:13}//更新对象需要加上.push()
+                // this.items1.push()
+             }
+            },
+        }) 
+    </script>
+
+</body>
+
+</html>

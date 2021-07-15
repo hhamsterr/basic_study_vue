@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="change" id="btn">切换</button><br><br>
+        <img src="./head.jpg" class="pic">
+    </div>
+    <script>
+        const btn = document.getElementById('btn')
+        const img = document.querySelector('.pic')
+        new Vue({
+            el: '#app',
+            data: {
+                isshow: true
+            },
+            mounted(){
+                this.img=document.querySelector('.pic')
+            },
+            methods: {
+
+                change() {
+                    console.log(123);
+                    if (this.isshow) {
+                        console.log(img);
+                        this.img.className = 'pic leave'
+                        console.log(22);
+                    }
+                    else {
+                        this.img.className = 'pic come'
+                    }
+                    this.isshow = !this.isshow
+                    console.log(44);
+                }
+            }
+        })
+    </script>
+    <style>
+        .pic {
+            transition: 1s all linear;
+        }
+
+        .come {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+        .leave {
+            opacity: 0;
+            transform: scale(0) rotate(180deg);
+        }
+    </style>
+</body>
+
+</html>

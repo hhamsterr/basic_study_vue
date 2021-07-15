@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.js"></script>
+</head>
+
+<body>
+    <!-- view层 模板 -->
+    <div id="app">
+
+        <div1>
+            <div2 slot="div2" :title="title"></div2>
+        </div1>
+        <br>
+        姓: <input type="text" v-model="first"><br>
+        名：<input type="text" v-model="last"> <br>
+        姓名：{{all}}
+    </div>
+
+
+    <script>
+        Vue.component("div1", {
+            template: `
+            <div>
+                <slot name="div2"></slot>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                </ul>
+                
+            </div>`
+        });
+        Vue.component("div2", {
+            props: ['title'],
+            template: `<div>{{title}}</div>`
+        });
+        var vm = new Vue({
+            // 绑定视图层的div app
+            el: "#app",//选择器字符串
+            data: {       //这是vm的属性
+                title: 'hello',
+                url: 'http://www.baidu.com',
+                message: 444,
+                first:'',
+                last:'',
+                all:''
+            },
+            watch:{
+                first(){
+                    this.all=this.first+'-'+this.last
+                },
+                last(){
+                    this.all=this.first+'-'+this.last
+                }
+            },
+            mounted() {
+                //钩子函数 链式编程 es6新特性
+                axios.get("data.json").then(response => {
+                    this.info = response.data
+                })
+            },
+
+        })
+    
+
+    </script>
+</body>
+
+</html>

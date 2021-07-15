@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h2 :style="{opacity:a}">分手怎么办</h2>
+        <button @click="death">不活了</button>
+    </div>
+    <script>
+        const vm=new Vue({
+            el:"#app",
+            data:{
+                a:0.5
+            },
+
+            mounted(){
+                setInterval(()=>{
+                    this.a-=0.01
+                    console.log(1);
+                    if(this.a<=0){
+                        this.a=1
+                        // setInterval(()=>{
+                        //     this.a+=0.01
+                        //     console.log(0);
+                        // },16)
+                    }
+                },16)
+            },
+            methods:{
+                death(){
+                    console.log(this);
+                    this.$destroy()
+                    console.log(this);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>非单文件组件</title>
+</head>
+
+<body>
+    <div id="app">
+        <School></School>
+    </div>
+    <script>
+        Vue.config.productionTip = false
+        Vue.prototype.xy=1//向vue的原型对象上追加一个xy属性
+        // 一，定义school组件 
+
+        //1.如何定义组件--Vue.extend(options)
+        //2.school本质是构造函数，写<School/>,Vue帮我们new School
+        //3.Vue.extend(options)的options是配置对象与new Vue的options类似
+        //  (1)不能写el去指定容器,原因：所有组件实例最终被一个vm管理，vm指定el
+        //  (2)data必须写成函数，原因：确保多个组件中的数据互不干扰
+        //  (3)组件的模板结构 ，配置在template属性中
+
+        const School = Vue.extend({
+            data() {
+                return {
+                    name: '长大',
+                    address: '西安'
+                }
+            },
+            template: `<div><h2>学校:{{name}}</h2>
+                            <h2>地址：{{address}}</h2>
+                        </div>`
+        })
+        //-------------------------------------
+        // const s=new School()//s为vuecomponent
+        // console.log(s);
+        //-------------------------------------
+
+        
+
+        //二，注册组件----全局注册
+        Vue.component('School', School)
+        //----------------------
+        
+        //---------------局部注册
+        new Vue({
+            el:"#app",
+            components:{
+                School:School//标签：组件
+            }    
+        })
+        //-----------------------
+    </script>
+</body>
+
+</html>

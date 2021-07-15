@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>非单文件组件</title>
+</head>
+
+<body>
+    <div id="app">
+        <App></App>
+    </div>
+    <script>
+        Vue.config.productionTip = false
+        Vue.prototype.xy=1//向vue的原型对象上追加一个xy属性
+        
+        const School = Vue.extend({
+            data() {
+                return {
+                    name: '长大',
+                    address: '西安'
+                }
+            },
+            template: `<div><h2>学校:{{name}}</h2>
+                            <h2>地址：{{address}}</h2>
+                        </div>`
+        })
+        const hello = Vue.extend({
+            data() {
+                return {
+                    name: '武大',
+                    address: '武汉'
+                }
+            },
+            template: `<div><h2>学校:{{name}}</h2>
+                            <h2>地址：{{address}}</h2>
+                        </div>`
+        })
+        const App=Vue.extend({
+            components:{
+                School,hello
+            },
+            template:`
+            <div>
+                <hello/>
+                <School/>
+            </div>
+            `
+        })
+        new Vue({
+            el:"#app",
+            components:{
+                App
+            }    
+        })
+        
+    </script>
+</body>
+
+</html>

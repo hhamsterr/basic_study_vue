@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h2 :style="{opacity:a}">分手怎么办{{a}}</h2>
+        <button @click="add" id="btn">不活了</button>
+        <button @click="death">销毁</button>
+        
+    </div>
+    <script>
+        // 修改vue全局配置
+        Vue.config.productionTip=false//关闭生产提示
+        const vm=new Vue({
+            el:"#app",
+            data:{
+                a:0.5
+            },
+            //vue实例初始化前，无法通过vm访问data数据
+            beforeCreate(){
+                // console.log(this);
+                // console.log('before');
+                // debugger
+            },
+            //vm初始化完成，可以通过vm访问data和methods
+            created(){
+                // console.log(this);
+                // console.log(this.a);
+                // debugger
+            },
+            //vue更新真实dom之前，操作dom无效，没有挂载到界面
+            beforeMount(){
+                // const btn=document.getElementById('btn')
+                // btn.innerText='123'
+                // console.log(document);
+                // debugger
+            },
+            //vue实例更新完真实dom（挂载完毕）
+            mounted(){
+                
+            },
+            //vue实例将要更新页面
+            beforeUpdate(){
+                // console.log(this.a);
+                // debugger;
+            },
+            updated(){
+                // console.log(this.a);
+                // debugger
+            },
+            //vue实例销毁之前
+            beforeDestroy(){
+                console.log(this.a);
+                debugger
+            },
+            methods:{
+               add(){
+                   this.a+=1
+               },
+               death(){
+                   this.$destroy()
+               }
+            }
+        })
+    </script>
+</body>
+</html>

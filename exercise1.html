@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- view层 模板 -->
+    <div id="app">
+        <div v-for="item in items">
+            <li>{{item}}</li>
+        </div>
+        <myfirst v-for="item1 in items" v-bind:item1="item1"></myfirst>
+    </div>
+    <script>
+        // 定义一个component
+        Vue.component("myfirst",{
+            props:['item1'],
+            template:'<li>{{item1}}</li>'
+        })
+
+        var vm=new Vue({
+            // 绑定视图层的div app
+            el:"#app",
+            // model层：数据
+            data:{
+                items:[1,2,3]
+            },
+            methods:{
+                
+            }
+        })
+    </script>
+</body>
+</html>
